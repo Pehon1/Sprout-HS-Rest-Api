@@ -16,7 +16,7 @@ const hubspotClient = new hubspot.Client({ apiKey: process.env.HUBSPOT_KEY })
 
 async function queryHubspotForUserEmailWithUserId(userId) {
     const email = await hubspotClient.crm.contacts.basicApi.getById(userId)
-    return { email: email.body.properties.email }
+    return email.body.properties.email
 }
 
 async function queryHubspotForUserWithConversationId(taskId) {
@@ -33,7 +33,7 @@ async function queryHubspotForUserWithConversationId(taskId) {
 app.route('/conversations/:conversationId')
     .get(async function (req, res) {
         var email = await queryHubspotForUserWithConversationId(req.params.conversationId)
-        res.send(email)
+        res.json(email)
     });
 
 app.listen(port);
