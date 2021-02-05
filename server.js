@@ -33,7 +33,7 @@ async function queryHubspotForUserWithConversationId(taskId) {
 app.route('/conversations/:conversationId')
     .get(async function (req, res) {
         var email = await queryHubspotForUserWithConversationId(req.params.conversationId)
-        res.json(email)
+        res.jsonp(email)
     });
 
 app.listen(port);
